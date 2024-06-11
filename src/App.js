@@ -48,6 +48,15 @@ function App() {
     setFavorites(newList);
     saveToLocalStorage(newList);
   };
+
+  const removeMovie = (movie) => {
+    const newList = favorites.filter(
+      (favorites) => favorites.imdbID !== movie.imdbID
+    );
+
+    setFavorites(newList);
+    saveToLocalStorage(newList);
+  }
   
   return (
     <div className="container-fluid movie-app">
@@ -57,7 +66,7 @@ function App() {
       </div>
 
       <ScrollContainer className="row">
-        <MovieList movies={movies} handleClick={addFavoriteMovie} />
+        <MovieList addMovie={true} movies={movies} handleClick={addFavoriteMovie} />
       </ScrollContainer>
 
       <div className="row align-items-center my-4">
@@ -65,7 +74,7 @@ function App() {
       </div>
 
       <ScrollContainer className="row scroll-container">
-        <MovieList movies={favorites}/>
+        <MovieList addMovie={false} movies={favorites} handleClick={removeMovie}/>
       </ScrollContainer>
     </div>
   );
